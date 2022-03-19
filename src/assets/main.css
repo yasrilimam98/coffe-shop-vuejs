@@ -1,0 +1,17 @@
+/* Buat Active link navbar */
+
+#app {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.router-link-exact-active {
+    font-weight: bold;
+}
+
+.btn-success {
+    background-color: #011526;
+}
+
+.badge-success {
+    background-color: #011526;
+}
