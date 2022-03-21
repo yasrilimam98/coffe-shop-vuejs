@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CoffeView from '../views/CoffeView.vue'
+import CoffeDetail from '../views/CoffeDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,12 @@ const routes = [
     path: '/coffe',
     name: 'Coffe',
     component: CoffeView
+  },
+  {
+    // detail router
+    path: '/coffe/:id',
+    name: 'CoffeDetail',
+    component: CoffeDetail
   },
   {
     path: '/about',
