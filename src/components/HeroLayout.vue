@@ -37,9 +37,9 @@
                 in Your Gadget
               </h2>
               <p>Ayo segera pilih dan pesan Coffe favorit Anda</p>
-              <button class="btn btn-lg btn-success">
+              <router-link class="btn btn-lg btn-success" to="/coffe">
                 <b-icon icon="arrow-right"></b-icon> Pesan
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
