@@ -26,16 +26,18 @@
              <h2><strong>{{product.nama}}</strong></h2>
              <hr>
              <h4>Harga : <strong>Rp. {{product.harga}} </strong></h4>
-             <form>
+             <!-- v-on:submit.prevent saat submit tidak ada reload -->
+             <form class="mt-4" v-on:submit.prevent>
                  <div class="form-group">
                      <label for="jumlah_pesanan">Jumlah Pesan</label>
-                        <input type="number" class="form-control" id="jumlah_pesanan" v-model="jumlah_pesanan" placeholder="Jumlah Pesan">
+                     <!-- v-model untuk mendaftarkan  -->
+                        <input type="number" class="form-control" id="jumlah_pesanan" v-model="pesan.jumlah_pesanan" placeholder="Jumlah Pesan">
                  </div>
                  <div class="form-group">
                      <label for="keterangan">Keterangan</label>
-                    <textarea class="form-control" id="keterangan" v-model="keterangan" placeholder="Keterangan"></textarea>
+                    <textarea class="form-control" id="keterangan" v-model="pesan.keterangan" placeholder="Keterangan"></textarea>
                  </div>
-                 <button type="submit" class="btn btn-success"><b-icon-cart></b-icon-cart> Pesan</button>
+                 <button type="submit" class="btn btn-success" @click="pemesanan"><b-icon-cart></b-icon-cart> Pesan</button>
              </form>
          </div>
      </div>
@@ -54,13 +56,41 @@ export default {
   },
   data() {
       return {
-        product: {}
+        product: {},
+        // Menampung pesanan
+        pesan:{}
       }
   },
   methods: {
       setProduct(data){
-        this.product = data
-      }
+        this.product = data;
+      },
+      // method pemesanan dari button
+      pemesanan() {
+        // Validate pemesanan
+        if(this.pesan.jumlah_pesanan){
+          this.pesan.products = this.product;
+          axios
+          .post("http://localhost:3000/keranjangs", this.pesan)
+          .then(() => {
+              this.$toast.success("Sukses Masuk Keranjang", {
+                type: 'success',
+                position: 'top-right',
+                duration: 3000,
+                dismissible: true
+              // console.log("Pesanan Berhasil");
+            });
+          })
+          .catch((err) => console.log(err))
+        }else{
+          this.$toast.error("Jumlah pesanan harus diisi!", {
+                type: 'error',
+                position: 'top-right',
+                duration: 3000,
+                dismissible: true
+          });
+        }
+      },
   },
   mounted() {
     axios
